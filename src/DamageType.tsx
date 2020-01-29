@@ -6,7 +6,7 @@ interface DamageTypeProps {
   name: string;
   hand: string;
   type: string;
-  damageChanged: Function,
+  damageChanged: Function;
 }
 
 const dmgArr = [
@@ -19,32 +19,36 @@ const dmgArr = [
   SETTINGS['Урон от магии'],
 ];
 
-export default class DamageTypeComponent extends React.Component<
-  DamageTypeProps
-> {
-  render() {
-    const { name, hand, type, damageChanged, damage } = this.props;
-    return (
-      <div className="DamageType">
-        <div className="DamageTypeTitle">{name}</div>
-        <span className="DamageTypeName">Min:</span>
-        <input value={damage.min} onChange={(e) => damageChanged(hand, type, 'min', e)} />
-        <br />
-        <span className="DamageTypeName">Max:</span>
-        <input value={damage.max} onChange={(e) => damageChanged(hand, type, 'max', e)} />
-        <br />
-        <span className="DamageTypeName">Тип урона:</span>
-        <select
-          defaultValue={damage.dmgType}
-          onChange={(e) => damageChanged(hand, type, 'dmgType', e)}
-        >
-          <option key="None">None</option>
-          {dmgArr.map((item: string) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
-        <br />
-      </div>
-    );
-  }
-}
+const DamageTypeComponent: React.FC<DamageTypeProps> = (props: DamageTypeProps) => {
+  const {
+    name,
+    hand,
+    type,
+    damageChanged,
+    damage,
+  } = props;
+  return (
+    <div className="DamageType">
+      <div className="DamageTypeTitle">{name}</div>
+      <span className="DamageTypeName">Min:</span>
+      <input value={damage.min} onChange={(e) => damageChanged(hand, type, 'min', e)} />
+      <br />
+      <span className="DamageTypeName">Max:</span>
+      <input value={damage.max} onChange={(e) => damageChanged(hand, type, 'max', e)} />
+      <br />
+      <span className="DamageTypeName">Тип урона:</span>
+      <select
+        defaultValue={damage.dmgType}
+        onChange={(e) => damageChanged(hand, type, 'dmgType', e)}
+      >
+        <option key="None">None</option>
+        {dmgArr.map((item: string) => (
+          <option key={item}>{item}</option>
+        ))}
+      </select>
+      <br />
+    </div>
+  );
+};
+
+export default DamageTypeComponent;

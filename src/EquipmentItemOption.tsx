@@ -27,9 +27,13 @@ export default class EquipmentItemOptionComponent extends React.Component<
   }
 
   render() {
+    const { name, value } = this.props;
     return (
       <div className="EquipmentItemOption">
-        <select onChange={(e) => this.setOptionName(e)}>
+        <select
+          defaultValue={name}
+          onChange={(e) => this.setOptionName(e)}
+        >
           <option defaultValue="None">None</option>
           {Object.values(SETTINGS).map((item: string) => (
             <option key={item}>{item}</option>
@@ -38,13 +42,13 @@ export default class EquipmentItemOptionComponent extends React.Component<
         {/* <Select
           className="react-select-container"
           classNamePrefix="react-select"
-          value={this.props.name as any}
+          value={name as any}
           options={Object.values(SETTINGS)}
           onChange={(e) => this.setOptionName(e)}
         /> */}
         <input
-          value={this.props.value}
-          disabled={!this.props.name}
+          value={value}
+          disabled={!name}
           onChange={(e) => this.setOptionValue(e)}
         />
         <button
